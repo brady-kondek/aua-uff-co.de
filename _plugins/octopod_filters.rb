@@ -249,7 +249,7 @@ module Jekyll
         p.data['navigation'] && p.data['title']
       }.sort_by { |p| p.data['navigation'] }
 
-      list =  ['<ul class="nav">']
+      list =  ['<ul class="nav navbar-nav">']
       list << pages.map { |p|
         active = (p.url == page['url']) || (page.has_key?('next') && File.join(p.dir, p.basename) == '/index')
         navigation_list_item(File.join(site['url'], p.url), p.data['title'], active)
