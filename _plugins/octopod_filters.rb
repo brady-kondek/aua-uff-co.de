@@ -120,41 +120,54 @@ module Jekyll
     #
     #   {{ page | audio_tag:site }}
     def audio_tag(page, site)
-      out = %Q{<audio id="#{slug(page)}_player" preload="none">\n}
-      out + page['audio'].map { |format, filename|
+      myslug = page[:id] && slug(page) || page['url'].split('/')[2]
+
+      out = %Q{<audio id="#{myslug}_player" preload="none">\n}
+      out = out + page['audio'].map { |format, filename|
         %Q{<source src="#{site['url']}/episodes/#{ERB::Util.url_encode(filename)}" type="#{mime_type(format)}"></source>}
       }.join("\n") + "\n</audio>\n"
     end
+
+
+    # Returns the web player moderator tag for the episode of a given page.
+    #
+    #   {{ page | web_player_moderator:site }}
+    def web_player_moderator(page, site)
+      out = %Q{<audio data-podlove-web-player-source="/players/#{page['slug']}">\n}
+      out = out + "<source src='episodes/#{page['audio']['mp3']}' type='audio/mp3'>\n"
+      out = out + "</audio>\n"
+      out = out + "<script>$('audio').podlovewebplayer();</script>\n"
+    end
+
 
     # Returns the web player for the episode of a given page.
     #
     #   {{ page | web_player:site }}
     def web_player(page, site)
       return if page['audio'].nil?
+      myslug = page[:id] && slug(page) || page['url'].split('/')[2]
 
       options = {
         alwaysShowHours: 'true',
         startVolume: '0.8',
         width: 'auto',
-        summaryVisible: 'false',
-        timecontrolsVisible: 'false',
+        summaryVisible: 'true',
+        timecontrolsVisible: 'true',
         chaptersVisible: 'true',
-        sharebuttonsVisible: 'false'
+        sharebuttonsVisible: 'true'
       }
 
       simple_keys = %w[]
 
-      if site = site.dup
-        # site.delete('title')
-        # site.delete('subtitle')
-        options = options.merge(site)
+      if sitehash = site.posts.first.site.config.dup
+        sitehash.delete('title')
+        sitehash.delete('subtitle')
+        options = options.merge(sitehash)
       end
       options = options.merge(page)
-
-      out = audio_tag(page, site)
-
-      out << "<script>\n$('##{slug(page)}_player').podlovewebplayer("
-      out << { poster: site['url'] + (options['episode_cover'] || '/img/logo-360x360.png'),
+      out = audio_tag(page, sitehash)
+      out << "<script>\n$('#" + myslug +"_player').podlovewebplayer("
+      out << { poster: sitehash['url'] + (options['episode_cover'] || '/img/logo-360x360.png'),
                subtitle: options['subtitle'],
                title: options['title'],
                alwaysShowHours: options['alwaysShowHours'],
@@ -164,24 +177,21 @@ module Jekyll
                timecontrolsVisible: options['timecontrolsVisible'],
                chaptersVisible: options['chaptersVisible'],
                sharebuttonsVisible: options['sharebuttonsVisible'],
-               show: {
-                 title: options['title'],
-                 subtitle: options['subtitle'],
-                 summary: options['summary']
-               },
+               show: { title: options['title'],
+                       subtitle: options['subtitle'],
+                       summary: options['summary'] },
                chapters: options['chapters'].map {|chapter| split_chapter(chapter)},
                downloads: [
-                 {
-                   assetTitle: options['title'],
-                   size: 12345,
-                   url: site['url'] + "/episodes/ " + ERB::Util.url_encode(options['filename'])
-                 },
+                 { assetTitle: options['title'],
+                   size: file_size(page['audio']['mp3']),
+                   downloadUrl: sitehash["url"] + "/episodes/" + page['audio']['mp3'] },
                ],
                summary: options['summary'],
                duration: string_of_duration(options['duration']),
-               permalink: site['url'] + page['url']
+               permalink: sitehash['url'] + page['url']
              }.to_json
       out << ")\n</script>"
+
     end
 
 
