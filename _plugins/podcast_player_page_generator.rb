@@ -9,11 +9,12 @@ module Jekyll
       self.process(@name)
       self.read_yaml(File.join(base, '_layouts'), 'player_index.html')
 
-      self.data['title'] = post.data['title']
-      self.data['author'] = post.data['author']
+      self.data['title']    = post.data['title']
+      self.data['author']   = post.data['author']
       self.data['explicit'] = post.data['explicit']
-      self.data['audio'] = post.data['audio']
+      self.data['audio']    = post.data['audio']
       self.data['chapters'] = post.data['chapters']
+      self.data['template'] = 'player_index'
     end
   end
 
