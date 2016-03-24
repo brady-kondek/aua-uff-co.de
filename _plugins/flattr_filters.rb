@@ -56,7 +56,7 @@ module Jekyll
     #   => { "octopod" => "awesome", "uid" => "pattex" }
     def flattrize(hsh)
       config = {}
-      hsh.each { |k, v|
+      hsh.to_hash.each { |k, v|
         if new_key = k.to_s.match(/\Aflattr_(.*)\z/)
           config[new_key[1]] = v
         else

@@ -145,8 +145,8 @@ module Jekyll
       simple_keys = %w[]
 
       if site = site.dup
-        site.delete('title')
-        site.delete('subtitle')
+        # site.delete('title')
+        # site.delete('subtitle')
         options = options.merge(site)
       end
       options = options.merge(page)
@@ -304,7 +304,6 @@ module Jekyll
          feeds << ["#{f} Episode RSS-Feed", "#{site['url']}/episodes.#{f}.rss"] unless f == except
         }
       end
-
       if site['additional_feeds']
         site['additional_feeds'].each { |k, v|
           feeds << [k.gsub('_', ' '), v] unless k == except
