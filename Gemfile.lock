@@ -1,6 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    byebug (8.2.2)
+    coderay (1.1.1)
     colorator (0.1)
     ffi (1.9.10)
     jekyll (3.0.1)
@@ -22,17 +24,33 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     mercenary (0.3.5)
+    method_source (0.8.2)
     octopod (0.1.1)
       jekyll
+    octopress-debugger (1.0.2)
+      jekyll
+      pry-byebug
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.3.0)
+      byebug (~> 8.0)
+      pry (~> 0.10)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rouge (1.10.1)
     safe_yaml (1.0.4)
     sass (3.4.21)
+    slop (3.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   octopod
+  octopress-debugger
+
+BUNDLED WITH
+   1.11.2

@@ -133,17 +133,16 @@ module Jekyll
       return if page['audio'].nil?
 
       options = {
-        'alwaysShowHours'     => 'true',
-        'startVolume'         => '0.8',
-        'width'               => 'auto',
-        'summaryVisible'      => 'false',
-        'timecontrolsVisible' => 'false',
-        'chaptersVisible'     => 'true',
-        'sharebuttonsVisible' => 'false'
+        alwaysShowHours: 'true',
+        startVolume: '0.8',
+        width: 'auto',
+        summaryVisible: 'false',
+        timecontrolsVisible: 'false',
+        chaptersVisible: 'true',
+        sharebuttonsVisible: 'false'
       }
 
-      simple_keys = %w[title alwaysShowHours startVolume width summaryVisible
-        timecontrolsVisible chaptersVisible sharebuttonsVisible]
+      simple_keys = %w[]
 
       if site = site.dup
         site.delete('title')
@@ -153,18 +152,38 @@ module Jekyll
       options = options.merge(page)
 
       out = audio_tag(page, site)
-      out << "<script>\n$('##{slug(page)}_player').podlovewebplayer({\n"
-      out << "poster: '#{site['url']}#{(options['episode_cover'] || '/img/logo-360x360.png')}',\n"
-      out << "subtitle: '#{j(options['subtitle'])}',\n" if options['subtitle']
-      out << "chapters: '#{options['chapters'].map { |c| j(c) }.join(%Q{'+"\\n"+'})}',\n" if options['chapters']
-      out << "summary: '#{j(options['summary'])}',\n" if options['summary']
-      out << "duration: '#{string_of_duration(options['duration'])}',\n"
-      out << "permalink: '#{site['url']}#{page['url']}',\n"
 
-      out << simple_keys.map { |k|
-        "#{k}: #{(k = options[k].to_s) =~ /\A(true|false|[0-9\.]+)\z/ ? k : "'#{j(k)}'"}"
-      }.join(",\n") + "});\n</script>\n"
+      out << "<script>\n$('##{slug(page)}_player').podlovewebplayer("
+      out << { poster: site['url'] + (options['episode_cover'] || '/img/logo-360x360.png'),
+               subtitle: options['subtitle'],
+               title: options['title'],
+               alwaysShowHours: options['alwaysShowHours'],
+               startVolume: options['startVolume'],
+               width: options['width'],
+               summaryVisible: options['summaryVisible'],
+               timecontrolsVisible: options['timecontrolsVisible'],
+               chaptersVisible: options['chaptersVisible'],
+               sharebuttonsVisible: options['sharebuttonsVisible'],
+               show: {
+                 title: options['title'],
+                 subtitle: options['subtitle'],
+                 summary: options['summary']
+               },
+               chapters: options['chapters'].map {|chapter| split_chapter(chapter)},
+               downloads: [
+                 {
+                   assetTitle: options['title'],
+                   size: 12345,
+                   url: site['url'] + "/episodes/ " + ERB::Util.url_encode(options['filename'])
+                 },
+               ],
+               summary: options['summary'],
+               duration: string_of_duration(options['duration']),
+               permalink: site['url'] + page['url']
+             }.to_json
+      out << ")\n</script>"
     end
+
 
     # Gets a number of seconds and returns an human readable duration string of
     # it.
