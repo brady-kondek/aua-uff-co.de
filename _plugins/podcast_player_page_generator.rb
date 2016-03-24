@@ -26,7 +26,8 @@ module Jekyll
           dir =  site.config['players_dir'] || 'players'
           site.posts.docs.each do |post|
             player = PodcastPlayerPage.new(site, site.source, dir, post)
-            player.write('/')
+#            player.render(site.layouts, site.site_payload)
+#            player.write(site.dest)
             site.pages << player
           end
         end
