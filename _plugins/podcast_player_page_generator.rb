@@ -4,9 +4,10 @@ module Jekyll
       @site = site
       @base = base
       @dir  = dir
-      @name = post.basename.sub!('episode','player').sub('.md', '.html')
+      @name = 'index.html'
+
       self.process(@name)
-      self.read_yaml(File.join(base, '_layouts'), 'player.html')
+      self.read_yaml(File.join(base, '_layouts'), 'player_index.html')
 
       self.data['title'] = post.data['title']
       self.data['author'] = post.data['author']
@@ -20,11 +21,10 @@ module Jekyll
     safe true
 
     def generate(site)
-      if site.layouts.key? 'player'
+      if site.layouts.key? 'player_index'
         dir =  site.config['players_dir'] || 'players'
         site.posts.docs.each do |post|
-        player = PodcastPlayerPage.new(site, site.source, dir, post)
-        site.pages << player
+          site.pages << PodcastPlayerPage.new(site, site.source, File.join(dir, post.data['slug']), post)
         end
       end
     end
