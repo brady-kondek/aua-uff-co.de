@@ -120,10 +120,7 @@ module Jekyll
     #
     #   {{ page | audio_tag:site }}
     def audio_tag(page, site)
-      myslug = page[:id] && slug(page) || page['url'].split('/')[2]
-
-      out = %Q{<audio id="#{myslug}_player" preload="none">\n}
-      out = out + page['audio'].map { |format, filename|
+      out = "<audio>" + page['audio'].map { |format, filename|
         %Q{<source src="#{site['url']}/episodes/#{ERB::Util.url_encode(filename)}" type="#{mime_type(format)}"></source>}
       }.join("\n") + "\n</audio>\n"
     end
@@ -133,9 +130,11 @@ module Jekyll
     #
     #   {{ page | web_player_moderator:site }}
     def web_player_moderator(page, site)
-      out = %Q{<audio data-podlove-web-player-source="/players/#{page['slug']}">\n}
-      out = out + "<source src='episodes/#{page['audio']['mp3']}' type='audio/mp3'>\n"
-      out = out + "</audio>\n"
+      out = %Q{<div class="podlove-player-wrapper">}
+      out = out + %Q{  <audio data-podlove-web-player-source="/players/#{page['slug']}/index.html">\n}
+      out = out + "    <source src='episodes/#{page['audio']['mp3']}' type='audio/mp3'>\n"
+      out = out + "  </audio>\n"
+      out = out + "</div>\n"
       out = out + "<script>$('audio').podlovewebplayer();</script>\n"
     end
 
@@ -145,7 +144,6 @@ module Jekyll
     #   {{ page | web_player:site }}
     def web_player(page, site)
       return if page['audio'].nil?
-      myslug = page[:id] && slug(page) || page['url'].split('/')[2]
 
       options = {
         alwaysShowHours: 'true',
@@ -166,7 +164,34 @@ module Jekyll
       end
       options = options.merge(page)
       out = audio_tag(page, sitehash)
-      out << "<script>\n$('#" + myslug +"_player').podlovewebplayer("
+    end
+
+    # Returns the web player for the episode of a given page.
+    #
+    #   {{ page | web_player_script_tag:site }}
+    def web_player_script_tag(page, site)
+      return if page['audio'].nil?
+
+      options = {
+        alwaysShowHours: 'true',
+        startVolume: '0.8',
+        width: 'auto',
+        summaryVisible: 'true',
+        timecontrolsVisible: 'true',
+        chaptersVisible: 'true',
+        sharebuttonsVisible: 'true'
+      }
+
+      simple_keys = %w[]
+
+      if sitehash = site.posts.first.site.config.dup
+        sitehash.delete('title')
+        sitehash.delete('subtitle')
+        options = options.merge(sitehash)
+      end
+      options = options.merge(page)
+
+      out = "<script>\n$('audio').podlovewebplayer("
       out << { poster: sitehash['url'] + (options['episode_cover'] || '/img/logo-360x360.png'),
                subtitle: options['subtitle'],
                title: options['title'],
@@ -191,9 +216,7 @@ module Jekyll
                permalink: sitehash['url'] + page['url']
              }.to_json
       out << ")\n</script>"
-
     end
-
 
     # Gets a number of seconds and returns an human readable duration string of
     # it.
