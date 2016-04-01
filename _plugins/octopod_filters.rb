@@ -213,7 +213,8 @@ module Jekyll
                ],
                summary: options['summary'],
                duration: string_of_duration(options['duration']),
-               permalink: sitehash['url'] + page['url']
+               permalink: sitehash['url'] + page['url'],
+               activeTab: "chapters"
              }.to_json
       out << ")\n</script>"
     end
