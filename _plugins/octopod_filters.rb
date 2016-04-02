@@ -29,6 +29,11 @@ module Jekyll
       end
     end
 
+    # Removes scripts tag and audio tags in multiline moderator
+    def remove_script_and_audio(input)
+      input.gsub(/<audio.*audio>/m, '').gsub(/<script.*script>/m, '')
+    end
+
     # Formats a Time to be RSS compatible like "Wed, 15 Jun 2005 19:00:00 GMT"
     #
     #   {{ site.time | time_to_rssschema }}
@@ -130,6 +135,7 @@ module Jekyll
     #
     #   {{ page | web_player_moderator:site }}
     def web_player_moderator(page, site)
+      return if page['audio'].nil?
       out = %Q{<div class="podlove-player-wrapper">}
       out = out + %Q{  <audio data-podlove-web-player-source="/players/#{page['slug']}/index.html">\n}
       out = out + "    <source src='episodes/#{page['audio']['mp3']}' type='audio/mp3'>\n"

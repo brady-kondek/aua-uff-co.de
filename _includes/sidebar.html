@@ -10,8 +10,15 @@
 Anna Geiger und Stefan Haslinger podcasten über Ihre Erfahrungen beim Programmieren und Programmieren Lernen. Es geht nicht unmittelbar um Code,
 sondern um den Erfahrungsaustausch, die Motivation, auch bei Rückschlägen nicht aufzugeben und viele Tipps und Ressourcen.
 </p>
-<hr>
+<hr/>
+<h4>RSS-Feeds</h4>
+<ul>
+  {% for feed in site['episode_feed_formats'] %}
+    <li><a href="{{ site['url']}}/episodes.{{ feed }}.rss"><i class="fa fa-rss"/> {{ feed }}-Feed</a></li>
+  {% endfor %}
+</ul>
+<hr/>
 <span class="pull-left">{{ site | flattr_button }}</span>
 {% if site.twitter_nick %}
-<a href="https://twitter.com/{{ site.twitter_nick }}" class="twitter-follow-button" data-show-count="false">Follow @{{ site.twitter_nick }}</a>
+  <a href="https://twitter.com/{{ site.twitter_nick }}" class="twitter-follow-button" data-show-count="false">Follow @{{ site.twitter_nick }}</a>
 {% endif %}
