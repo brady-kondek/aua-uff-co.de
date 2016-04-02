@@ -11,12 +11,13 @@ Anna Geiger und Stefan Haslinger podcasten über Ihre Erfahrungen beim Programmi
 sondern um den Erfahrungsaustausch, die Motivation, auch bei Rückschlägen nicht aufzugeben und viele Tipps und Ressourcen.
 </p>
 <hr/>
+
 <h4>RSS-Feeds</h4>
-<ul>
-  {% for feed in site['episode_feed_formats'] %}
-    <li><a href="{{ site['url']}}/episodes.{{ feed }}.rss"><i class="fa fa-rss"/> {{ feed }}-Feed</a></li>
-  {% endfor %}
-</ul>
+
+{% for feed in site['episode_feed_formats'] %}
+  <a href="{{ site['url']}}/episodes.{{ feed }}.rss"><i class="fa fa-rss"></i> {{ feed }}-Feed</a><br/>
+{% endfor %}
+
 <hr/>
 <span class="pull-left">{{ site | flattr_button }}</span>
 {% if site.twitter_nick %}
