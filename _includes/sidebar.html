@@ -4,12 +4,47 @@
     {% if site.subtitle %}<br/><small>{{ site.subtitle }}</small>{% endif %}
   </h3>
 </div>
-<img width="100%" class="thumbnail" src="{{ site.url }}/img/logo-360x360.png" alt="{{ site.title }} logo">
-<hr>
+
+<p class="text-center">
+  <img width="200px" src="{{ site.url }}/img/logo-360x360.png" alt="{{ site.title }} logo">
+</p>
+
 <p>
 Anna Geiger und Stefan Haslinger podcasten über Ihre Erfahrungen beim Programmieren und Programmieren Lernen. Es geht nicht unmittelbar um Code,
 sondern um den Erfahrungsaustausch, die Motivation, auch bei Rückschlägen nicht aufzugeben und viele Tipps und Ressourcen.
 </p>
+
+<p class="text-center">
+  <script class="podlove-subscribe-button"
+          src="https://cdn.podlove.org/subscribe-button/javascripts/app.js"
+          data-language="de"
+          data-size="medium"
+          data-json-data="podcastData"
+          data-colors="#FC6E51;green;blue"
+          data-buttonid="123abc"
+          data-hide="false">
+  </script>
+  <script>
+    window.podcastData = {
+      "title": "{{ site['title']}}",
+      "subtitle": "{{ site['subtitle']}}",
+      "description": "{{ site['description']}}",
+      "cover": "{{ site.url }}/img/logo-360x360.png",
+      "feeds": [
+      {% for feed in site['episode_feed_formats'] %}
+        {
+          "type": "audio",
+          "format": "{{ feed }}",
+          "url": "{{ site['url']}}/episodes.{{ feed }}.rss",
+          "directory-url-itunes": "{{ site['itunes_url']}}",
+          "variant": "high"
+        },
+      {% endfor %}
+      ]
+    }
+  </script>
+</p>
+
 <hr/>
 
 <h4>RSS-Feeds</h4>
@@ -19,37 +54,6 @@ sondern um den Erfahrungsaustausch, die Motivation, auch bei Rückschlägen nich
     <li><a href="{{ site['url']}}/episodes.{{ feed }}.rss"><i class="fa fa-rss"></i> {{ feed }}-Feed</a></li>
   {% endfor %}
 </ol>
-
-<script class="podlove-subscribe-button"
-        src="https://cdn.podlove.org/subscribe-button/javascripts/app.js"
-        data-language="de"
-        data-size="small"
-        data-json-data="podcastData"
-        data-colors="red;green;blue"
-        data-buttonid="123abc"
-        data-hide="true">
-</script>
-<script>
-  window.podcastData = {
-    "title": "Newz of the World",
-    "subtitle": "Tim and Mark talk about the Newz™",
-    "description": "Newz of the World is a weekly show about world news. Mark Fonseca Rendeiro and Tim Pritlove come together to present interesting reports and discuss their aspects and possible consequences. Newz of the world wants to be an alternative window to the common media flow and cherry picks interesting developments for you.",
-    "cover": "http://meta.metaebene.me/media/newz/newz-logo-600x600.jpg",
-    "feeds": [
-    {% for feed in site['episode_feed_formats'] %}
-      {
-        "type": "audio",
-        "format": "{{ feed }}",
-        "url": "{{ site['url']}}/episodes.{{ feed }}.rss",
-        "directory-url-itunes": "{{ site['itunes_url']}}",
-        "variant": "high"
-      },
-    {% endfor %}
-    ]
-  }
-</script>
-
-
 
 
 <h4>Verzeichnisse</h4>
