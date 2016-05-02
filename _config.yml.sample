@@ -1,7 +1,7 @@
 # You have to configure this ###################################################
 title: Octopod
 # You should configure this ####################################################
-url: 
+url:
 subtitle: podcast delivery for geeks
 description: My super duper cool podcast.
 author: Uncle Octopod
@@ -41,6 +41,7 @@ flattr_popout:  0 # 1 | 0 (show popout when hovering mouse over button)
 flattr_language: en_GB # available languages - https://api.flattr.com/rest/v2/languages.txt
 flattr_category: audio # available categories - https://api.flattr.com/rest/v2/categories.txt
 ## Disqus comments #############################################################
-disqus_shortname: 
+disqus_shortname:
 disqus_developer: 0 # 1 / 0
-
+## Itunes
+itunes_url: "https://itunes.apple.com/at/podcast/myname/id#myid#"
