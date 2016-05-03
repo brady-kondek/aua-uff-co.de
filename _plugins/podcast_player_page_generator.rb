@@ -10,6 +10,8 @@ module Jekyll
       self.read_yaml(File.join(base, '_layouts'), 'player_index.html')
 
       self.data['title']    = post.data['title']
+      self.data['subtitle'] = post.data['subtitle']
+      self.data['datum']    = post.data['datum']
       self.data['author']   = post.data['author']
       self.data['explicit'] = post.data['explicit']
       self.data['audio']    = post.data['audio']

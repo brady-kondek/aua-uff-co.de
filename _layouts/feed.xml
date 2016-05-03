@@ -35,7 +35,7 @@ layout: null
     </itunes:category>
     {% for post in site.posts %}{% if post.audio[page.format] %}
     <item>
-      <title>{{ post.title }}</title>
+      <title>{{ post.title }} - {{ post.subtitle }}</title>
       <link>{{ site.url }}{{ post.url }}</link>
       <comments>{{ site.url }}{{ post.url }}#disqus_thread</comments>
       <pubDate>{{ post.date | time_to_rssschema }}</pubDate>
