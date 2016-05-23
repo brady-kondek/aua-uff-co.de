@@ -1,33 +1,47 @@
-GEM
-  remote: http://rubygems.org/
+GIT
+  remote: git://github.com/jekyll/jekyll.git
+  revision: 96ac1185a1f1e5d00a3bbd3a147c1b27c1e5879e
   specs:
-    byebug (8.2.2)
-    coderay (1.1.1)
-    colorator (0.1)
-    ffi (1.9.10)
     jekyll (3.1.2)
-      colorator (~> 0.1)
+      colorator (~> 1.0)
       jekyll-sass-converter (~> 1.0)
       jekyll-watch (~> 1.1)
       kramdown (~> 1.3)
       liquid (~> 3.0)
       mercenary (~> 0.3.3)
+      pathutil (~> 0.9)
       rouge (~> 1.7)
       safe_yaml (~> 1.0)
+
+PATH
+  remote: ../jekyll-podcasting
+  specs:
+    jekyll-podcasting (0.1.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    byebug (8.2.2)
+    coderay (1.1.1)
+    colorator (1.0.0)
+    ffi (1.9.10)
+    forwardable-extended (2.6.0)
     jekyll-sass-converter (1.4.0)
       sass (~> 3.4)
-    jekyll-watch (1.3.1)
-      listen (~> 3.0)
-    kramdown (1.10.0)
+    jekyll-watch (1.4.0)
+      listen (~> 3.0, < 3.1)
+    kramdown (1.11.1)
     liquid (3.0.6)
-    listen (3.0.6)
+    listen (3.0.7)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
-    mercenary (0.3.5)
+    mercenary (0.3.6)
     method_source (0.8.2)
     octopress-debugger (1.0.2)
       jekyll
       pry-byebug
+    pathutil (0.12.0)
+      forwardable-extended (~> 2.6)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -40,13 +54,15 @@ GEM
       ffi (>= 0.5.0)
     rouge (1.10.1)
     safe_yaml (1.0.4)
-    sass (3.4.21)
+    sass (3.4.22)
     slop (3.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  jekyll!
+  jekyll-podcasting!
   octopress-debugger
 
 BUNDLED WITH
