@@ -1,6 +1,6 @@
 Filter logfiles before parsing:
 
-rsync user@server.com:/var/log/apache2/other_vhosts_access* .
+rsync -v user@server.com:/var/log/apache2/other_vhosts_access* .
 gunzip *.gz
 ruby -ne 'print if /aua-uff-co.de/' -i other_vhosts_access.log* -i
 find . -size  0 -print0 |xargs -0 rm
