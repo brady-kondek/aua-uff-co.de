@@ -14,9 +14,9 @@ GIT
       safe_yaml (~> 1.0)
 
 PATH
-  remote: ../jekyll-podcasting
+  remote: ../jekyll-octopod
   specs:
-    jekyll-podcasting (0.1.0)
+    jekyll-octopod (0.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -62,7 +62,7 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll!
-  jekyll-podcasting!
+  jekyll-octopod!
   octopress-debugger
 
 BUNDLED WITH

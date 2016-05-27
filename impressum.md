@@ -21,8 +21,8 @@ Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Sc
 
 # Lizenz
 
-[![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+[![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
 
 Die Inhalte der Webseite und der Podcasts sind unter der<br/>
-[Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+[Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/)
 lizensiert.
