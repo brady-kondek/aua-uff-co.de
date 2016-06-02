@@ -1,12 +1,12 @@
 ---
-title: Podcasting Meetup
+title: Unsubscribe
 layout: null
-talk: 1
+talk: 3
 ---
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>Jekyll-Octopod</title>
     <meta charset="utf-8">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -26,27 +26,16 @@ talk: 1
 
 class: center, middle
 
-# Jekyll - Podcasting
+# Jekyll - Octopod
 
-Talk beim Podcasting-Meetup am 8.4.2016
+Talk bei der Unsubscribe am 4.6.2016
 
 @informatom
 
 stefan.haslinger@informatom.com
 
 ---
-# Was zuletzt geschah
-
-Octopod
-
-= Ruby + Jekyll + Plugin
-
-= Static Site Generator für Podcasting Websites
-
-Demo: https://www.panoptikum.io/
-
-ein paar kleinere Updates eingemeldet => keine Reaktion
----
+class: center, middle
 # Idee zu einem neuen Podcast
 
 Thema: Programmieren und Programmieren lernen
@@ -55,11 +44,24 @@ Titel: Aua - Uff - Code!
 
 in Anlehnung an Hour Of Code
 
-Podcasting: Anna Geiger und Stefan Haslinger
+PodcasterInnen: Anna Geiger und Stefan Haslinger
 
 WWW: https://aua-uff-co.de
 
 ---
+class: center, middle
+# Publishing
+
+~~Stefan's CMS?~~
+
+~~Wordpress?~~
+
+Static Site!
+
+Octopod! von Arne Eilermann
+
+---
+
 # Was seitdem geschah
 
 Fork (ist nicht böse)
@@ -84,29 +86,6 @@ Update der verwendeten Komponenten
 * https-Logos und Episoden => http
 
 ---
-# Reaktivieren von http
-
-```bash
-<VirtualHost *:80>
-  ServerName aua-uff-co.de
-  ServerAlias www.aua-uff-co.de
-
-  DocumentRoot /var/www/aua-uff-co.de/
-  DirectoryIndex index.html
-  <Directory /var/www/aua-uff-co.de/>
-    Allow from all
-  </Directory>
-
-  #  Redirect permanent / https://aua-uff-co.de/
-
-  RewriteEngine on
-  RewriteCond %{REQUEST_URI} !\.mp3$
-  RewriteCond %{REQUEST_URI} !\.jpg$
-  RewriteCond %{REQUEST_URI} !\.rss$
-  RewriteRule (.*) https://aua-uff-co.de$1 [R=301,L]
-</VirtualHost>
-```
-</VirtualHost>
 ---
 # Status
 
@@ -124,7 +103,6 @@ Update der verwendeten Komponenten
 ---
 # Zukunft
 
-* Extraktion in ein Jekyll-Plugin
 * Kontaktaufnahme mit Github
 * Einmelden als Jekyll Plugin bei Github
 * lokale Suche
@@ -138,7 +116,7 @@ Twitter: https://twitter.com/AuaUffCode @AuaUffCode
 
 Github: https://github.com/aua-uff-code/aua-uff-co.de
 
-diese Folien: https://aua-uff-co.de/podcasting-meetup.html
+diese Folien: https://aua-uff-co.de/unsubscribe.html
 
     </textarea>
     <script src="js/remark-latest.min.js">

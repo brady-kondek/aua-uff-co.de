@@ -49,8 +49,10 @@
           <a class="navbar-brand" href="{{ site.url }}">{{ site.title }}</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            {{ site | navigation_list:page }}
-
+            <ul class="nav navbar-nav">
+              {{ site | navigation_list:page }}
+              {{ site | talk_list:page }}
+            </ul>
           <form class="navbar-form navbar-right" action="https://google.com/search" method="get" role="search">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Suchbegriff">
