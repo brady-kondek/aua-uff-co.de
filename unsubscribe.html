@@ -9,6 +9,7 @@ talk: 3
     <title>Jekyll-Octopod</title>
     <meta charset="utf-8">
     <style>
+      @import url(/css/remark-additional.css);
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
       @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
@@ -20,15 +21,18 @@ talk: 3
       }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
     </style>
+
   </head>
   <body>
     <textarea id="source">
 
 class: center, middle
 
-# Jekyll - Octopod
+![logo](/img/octopod.png)
 
-Talk bei der Unsubscribe am 4.6.2016
+## Jekyll - Octopod fordert Podlove Publisher
+
+Talk bei der Unsubscribe Wien, am 4.6.2016
 
 @informatom
 
@@ -38,85 +42,217 @@ stefan.haslinger@informatom.com
 class: center, middle
 # Idee zu einem neuen Podcast
 
+PodcasterInnen: Anna Geiger und Stefan Haslinger
+
 Thema: Programmieren und Programmieren lernen
 
 Titel: Aua - Uff - Code!
 
 in Anlehnung an Hour Of Code
 
-PodcasterInnen: Anna Geiger und Stefan Haslinger
-
 WWW: https://aua-uff-co.de
 
 ---
-class: center, middle
+class: center
 # Publishing
+
+Wordpress and Podlove Publisher?
+---
+class: center
+# Publishing
+
+~~Wordpress and Podlove Publisher?~~
+
+Stefan's CMS?
+
+---
+class: center
+# Publishing
+
+~~Wordpress and Podlove Publisher?~~
 
 ~~Stefan's CMS?~~
 
-~~Wordpress?~~
+Ruby + statische Seite => Jekyll!
 
-Static Site!
+--
 
-Octopod! von Arne Eilermann
+Octopod! von @pattex Arne Eilermann
+
+---
+# Warum will man eine statische Seite?
+
+* keine "Programme" am Server
+
+--
+
+  kein PHP, kein Wordpress<br/>
+  keine Datenbank<br/>
+  kein Ruby, etc.<br/>
+  => Sicherheit<br/>
+  => kein Updatestress
+
+--
+
+* geringer Ressourcenbedarf
+
+--
+
+* mit Github Pages kostenloses Hosting<br/>
+  (100MB file size limit)
+
+--
+
+* anpassbar (Bootstrap Theme)
+
+--
+
+* programmierbar:<br/>
+  Erweiterungen in Liquid + Ruby
 
 ---
 
-# Was seitdem geschah
+# Nachteile
 
-Fork (ist nicht böse)
+* kein Webinterface<br/>
+  sondern Markdown (oder Textile)
 
-Reintegration von Octopod in das Site Template
+--
 
-Update der verwendeten Komponenten
+* Kommentarfunktion mit externem Service Disqus
+
+---
+
+# Status zu Jahresbeginn 2016
+
+* Octopod drei Jahre nicht mehr aktualisiert
+
+* funktionierte (nach ein paar Minuten) mit aktuellem Jekyll
+
+---
+
+# Update der verwendeten Komponenten
+
 * Bootstrap => 3.3.0
+
 * Bootflat Template
-* Podlove Webplayer => 3.0 (aua! - Frames, Chromium)
-* https-kompatibel (uff!)
-* Installation und Redirekt von http zu https
----
 
-# Was sonst noch geschah
+* Podlove Webplayer => 3.0
 
-* Einmelden bei Itunes (aua! aua!)
-  * bei Apple Podcast Connect https://podcastsconnect.apple.com
-* Feed validieren: https://validator.w3.org/feed/ (aua!)
-* Simple chapters (uff!)
-* https-Feed => http
-* https-Logos und Episoden => http
+* https-kompatibel
+
+* Installation und Umleitung von http zu https
 
 ---
+class: inverse, center, middle
+
+# Kontaktaufnahme
+
+## @pattex: "Tu!"
+
 ---
-# Status
+
+# Weiterentwicklung
+
+* Installation vereinfacht<br/>
+  (Ruby + ~5 min)
+
+--
+
+* neue Features<br/>
+  z.B. Podlove Subscribe Button
+
+--
+
+* Dokumentation überarbeitet und erweitert<br/>
+  von native speaker gecheckt
+
+--
+
+* ist nun ein Jekyll-Plugin mit dem Titel jekyll-octopod
+
+* Webseite https://jekyll-octopod.github.io<br/>
+  ist selbst eine jekyll-octopod Seite
+
+
+---
+# Features
 
 * mehrere Feeds (mp3, m4a, ogg)
+--
+
 * Itunes-kompatibler Feed
+--
+
 * Podlove Webplayer
-* Flattr-Integration
-* Twitter Integration
-* Bootstrap kompatibel
-* Bootflat Theme
-* Problemloser Download in Beyondpod
+--
+
+* Flattr
+--
+
+* Twitter
+--
+
+* hübsches Bootflat Theme<br/>
+  Bootstrap kompatibel
+--
+
+* Problemloser Download in Beyondpod, Antennapod, ...
+--
+
 * Podlove Simple Chapters im Webplayer und im Feed
+--
+
 * Shownotes im Feed (aber kein Webplayer)
+--
+
+* Podlove Subscribe Button
+--
+
+* gute Dokumentation
 
 ---
-# Zukunft
+class: middle, center, inverse
 
-* Kontaktaufnahme mit Github
-* Einmelden als Jekyll Plugin bei Github
-* lokale Suche
+# Demo
+
+https://aua-uff-co.de
 
 ---
+class: middle, center
+
+# Pläne
+
+Marketing
+
+Freischaltung bei Github
+
+lokale Suche
+
+---
+class: middle, center
+
+![logo](/img/octopod.png)
+
+#Fragen?
+
+---
+
+class: middle, center, inverse
+
 # Danke!
 
-Podcast: https://aua-uff-co.de
+Projektseite<br/>
+http://jekyll-octopod.github.io
 
-Twitter: https://twitter.com/AuaUffCode @AuaUffCode
+Podcast<br/>
+https://aua-uff-co.de
 
-Github: https://github.com/aua-uff-code/aua-uff-co.de
+Twitter<br/>
+[@informatom](https://twitter.com/informatom)
 
-diese Folien: https://aua-uff-co.de/unsubscribe.html
+diese Folien<br/>
+https://aua-uff-co.de/unsubscribe.html
 
     </textarea>
     <script src="js/remark-latest.min.js">
