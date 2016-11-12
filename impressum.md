@@ -6,8 +6,6 @@ navigation: 1
 
 # Medieninhaber und Kontakt
 
-Anna Geiger
-
 Mag. Stefan Haslinger <br />
 Vorgartenstrasse 145/2/3 <br />
 1020 Wien <br />
