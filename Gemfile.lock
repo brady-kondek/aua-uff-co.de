@@ -17,7 +17,7 @@ GIT
 PATH
   remote: ../jekyll-octopod
   specs:
-    jekyll-octopod (0.7.0)
+    jekyll-octopod (0.7.2)
       jekyll (~> 3.3, >= 3.3.1)
       jekyll-bootflat (~> 0.1)
 
@@ -31,7 +31,7 @@ GEM
     colorator (1.1.0)
     ffi (1.9.14)
     forwardable-extended (2.6.0)
-    jekyll-bootflat (0.2)
+    jekyll-bootflat (0.2.1)
       jekyll (~> 3.3)
     jekyll-sass-converter (1.5.0)
       sass (~> 3.4)
@@ -74,4 +74,4 @@ DEPENDENCIES
   octopress-debugger
 
 BUNDLED WITH
-   1.13.5
+   1.13.6
