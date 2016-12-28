@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jekyll/jekyll.git
-  revision: 4382b2467baf6d3f35dd82fabec9a01b60b4f1d9
+  revision: 52c2645abb871dbde190651e8e2396dacb3b60dc
   specs:
     jekyll (3.3.1)
       addressable (~> 2.4)
@@ -17,7 +17,7 @@ GIT
 PATH
   remote: ../jekyll-octopod
   specs:
-    jekyll-octopod (0.7.2)
+    jekyll-octopod (0.7.3)
       jekyll (~> 3.3, >= 3.3.1)
       jekyll-bootflat (~> 0.1)
 
@@ -37,7 +37,7 @@ GEM
       jekyll (~> 3.1)
       sinatra (~> 1.4)
       sinatra-contrib (~> 1.4)
-    jekyll-bootflat (0.2.1)
+    jekyll-bootflat (0.2.2)
       jekyll (~> 3.3)
     jekyll-sass-converter (1.5.0)
       sass (~> 3.4)
@@ -74,7 +74,7 @@ GEM
       ffi (>= 0.5.0)
     rouge (1.11.1)
     safe_yaml (1.0.4)
-    sass (3.4.22)
+    sass (3.4.23)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
