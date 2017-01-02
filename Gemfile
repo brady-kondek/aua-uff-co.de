@@ -6,4 +6,5 @@ gem 'jekyll', github: "jekyll/jekyll"
    gem 'octopress-debugger'
    gem 'jekyll-octopod', path: "../jekyll-octopod"
    gem 'jekyll-admin'
+   gem 'jekyll-bootflat'
  end
