@@ -17,7 +17,8 @@ GIT
 PATH
   remote: ../jekyll-octopod
   specs:
-    jekyll-octopod (0.7.9)
+    jekyll-octopod (0.8.2)
+      facets (~> 3.1)
       jekyll (~> 3.3, >= 3.3.1)
       jekyll-bootflat (~> 0.2.4)
 
@@ -30,6 +31,7 @@ GEM
     byebug (9.0.6)
     coderay (1.1.1)
     colorator (1.1.0)
+    facets (3.1.0)
     ffi (1.9.17)
     forwardable-extended (2.6.0)
     jekyll-admin (0.2.0)
