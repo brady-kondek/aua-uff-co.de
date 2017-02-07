@@ -17,7 +17,7 @@ GIT
 PATH
   remote: ../jekyll-octopod
   specs:
-    jekyll-octopod (0.8.2)
+    jekyll-octopod (0.8.3)
       facets (~> 3.1)
       jekyll (~> 3.3, >= 3.3.1)
       jekyll-bootflat (~> 0.2.4)
