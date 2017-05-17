@@ -14,4 +14,12 @@
     </small> <br />
     <small>{{ post.subtitle }}</small>
   </h1>
+
+  {% if post.contributors %}
+    {% for contributor in post.contributors %}
+      {% if forloop.first == false %} &nbsp; - &nbsp; {% endif %}
+      <a href="{{contributor.uri}}"><i class="fa fa-user"></i> {{ contributor.name }}</a>
+    {% endfor %}
+    <br/><br/>
+  {% endif %}
 </div>
