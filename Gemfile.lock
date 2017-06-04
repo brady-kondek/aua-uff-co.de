@@ -14,6 +14,15 @@ GIT
       rouge (~> 1.7)
       safe_yaml (~> 1.0)
 
+PATH
+  remote: ../jekyll-octopod
+  specs:
+    jekyll-octopod (0.8.9)
+      facets (~> 3.1)
+      jekyll (~> 3.3, >= 3.3.1)
+      jekyll-admin (~> 0.4.0)
+      jekyll-bootflat (~> 0.2.4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -31,11 +40,6 @@ GEM
       sinatra-contrib (~> 1.4)
     jekyll-bootflat (0.2.4)
       jekyll (~> 3.3)
-    jekyll-octopod (0.8.9)
-      facets (~> 3.1)
-      jekyll (~> 3.3, >= 3.3.1)
-      jekyll-admin (~> 0.4.0)
-      jekyll-bootflat (~> 0.2.4)
     jekyll-sass-converter (1.5.0)
       sass (~> 3.4)
     jekyll-watch (1.5.0)
@@ -81,7 +85,7 @@ DEPENDENCIES
   jekyll!
   jekyll-admin
   jekyll-bootflat
-  jekyll-octopod (= 0.8.9)
+  jekyll-octopod!
 
 BUNDLED WITH
    1.14.6
