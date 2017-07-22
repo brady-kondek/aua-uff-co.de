@@ -12,4 +12,4 @@ ruby -ne 'print if /\/episodes\/episode/' -i other_vhosts_access.log* -i
 
 # Umwandlung von mp3 in opus:
 
-avconv -i episodexx.mp3 -f wav - | opusenc --bitrate 128 - episodexx.opus
+avconv -i episode25.mp3 -f wav - | opusenc --bitrate 128 - episode25.opus
