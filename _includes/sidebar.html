@@ -17,13 +17,12 @@ Motivation, auch bei Rückschlägen nicht aufzugeben und viele Tipps und Ressour
 
 <p class="text-center">
   <script class="podlove-subscribe-button"
-          src="https://cdn.podlove.org/subscribe-button/javascripts/app.js"
-          data-language="de"
-          data-size="medium"
+          src="/subscribe-button/javascripts/app.js"
+          data-language="{{ site.language }}"
+          data-size="medium auto"
+          data-style="filled"
           data-json-data="podcastData"
-          data-colors="#FC6E51;green;blue"
-          data-buttonid="123abc"
-          data-hide="false">
+          data-colors="#FC6E51;green;blue">
   </script>
   <script>
     window.podcastData = {
@@ -77,9 +76,9 @@ senden.</p>
 
 <ol type="i">
   <li>in Apple-<a href="https://itunes.apple.com/at/podcast/aua-uff-code!/id1099454611?l=de"><i class="fa fa-apple"></i> Itunes</a></li>
-  <li>als Torrents bei <a href="https://bitlove.org/aua-uff-code"><img src="https://bitlove.org/static/favicon.png"/> Bitlove</a></li>
+  <li>als Torrents bei <a href="https://bitlove.org/aua-uff-code"><img src="/img/bitlove.png"/> Bitlove</a></li>
   <li>in der Podcast-Suchmaschine <a href="https://fyyd.de/podcast/39419/0">Fyyd</a></li>
-  <li>bei <a href="https://gpodder.net/podcast/aua-uff-code"><img src="https://gpodder.net/static/gpoddernet_64.png" height="16" /> Gpodder.net</a></li>
+  <li>bei <a href="https://gpodder.net/podcast/aua-uff-code"><img src="/img/gpodder.png" height="16" /> Gpodder.net</a></li>
 </ol>
 
 
@@ -93,11 +92,19 @@ senden.</p>
 <h4>Lizenz</h4>
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-  <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+  <img alt="Creative Commons License" style="border-width:0" src="/img/88x31.png" /></a>
 
 
 <hr/>
-<span class="pull-left">{{ site | flattr_button }}</span>
-{% if site.twitter_nick %}
-  <a href="https://twitter.com/{{ site.twitter_nick }}" class="twitter-follow-button" data-show-count="false">Follow @{{ site.twitter_nick }}</a>
+{% if site.flattr_uid %}
+  <span class="pull-left">{{ site | flattr_button }}</span>
 {% endif %}
+
+{% if site.twitter_nick %}
+  <a href="https://twitter.com/{{ site.twitter_nick }}"
+     class="button btn-primary btn-sm"
+     data-show-count="false">
+    <i class="fa fa-twitter"></i>Follow @{{ site.twitter_nick }}
+  </a>
+{% endif %}
+
