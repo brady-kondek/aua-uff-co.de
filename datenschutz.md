@@ -2,24 +2,23 @@
 title: Datenschutzerklärung
 layout: page
 permalink: datenschutz/
-navigation: 2
 ---
 
-Der Schutz Ihrer persönlichen Daten ist mir wichtig. Ich verarbeite Ihre Daten daher ausschließlich
+Der Schutz Ihrer persönlichen Daten ist uns wichtig. Wir verarbeiten Ihre Daten daher ausschließlich
 auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TKG 2003). In diesen Datenschutzinformationen
-informiere ich Sie über die wichtigsten Aspekte der Datenverarbeitung im Rahmen meiner Website.
+informieren wir Sie über die wichtigsten Aspekte der Datenverarbeitung im Rahmen unserer Website.
 
 
-## Kommunikation mit mir
+## Kommunikation mit uns
 
-Wenn Sie per E-Mail Kontakt mit mir aufnehmen, werden Ihre angegebenen Daten zwecks Bearbeitung der
-Anfrage und für den Fall von Anschlussfragen sechs Monate bei mir gespeichert. Diese Daten geben
+Wenn Sie per E-Mail Kontakt mit uns aufnehmen, werden Ihre angegebenen Daten zwecks Bearbeitung der
+Anfrage und für den Fall von Anschlussfragen sechs Monate bei uns gespeichert. Diese Daten geben
 wir nicht weiter.
 
 
 ## Logging
 
-Ich loggen Ihre Anfragen auf meinem Server für eine Woche zur Behebung von Fehlfunktionen meiner
+Wir loggen Ihre Anfragen auf unserem Server für eine Woche zur Behebung von Fehlfunktionen unserer
 Webseite folgende Daten:
 
 * User-Agent, d.h. Browsertyp, Browserversion und Betriebssystem
@@ -42,15 +41,14 @@ ist dies die [Datenschutzbehörde](https://www.dsb.gv.at/).
 
 ## Kontakt
 
-Sie erreichen mich unter folgenden Kontaktdaten:
+Sie erreichen uns unter folgenden Kontaktdaten:
 
 Mag Stefan Haslinger<br/>
-Informatom EDV-Dienstleistungen<br/>
 Vorgartenstrasse 145/2/3<br/>
 1020 Wien, Austria<br/>
 
 {% icon fa-phone %} +43 680 213 3030
 
-[{% icon fa-envelope %} stefan.haslinger@informatom.com](mailto://stefan.haslinger@informatom.com)
+[{% icon fa-envelope %} stefan@podcasterei.at](mailto://stefan@podcasterei.at)
 
 <br/>
