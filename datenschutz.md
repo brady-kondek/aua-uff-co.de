@@ -49,6 +49,6 @@ Vorgartenstrasse 145/2/3<br/>
 
 {% icon fa-phone %} +43 680 213 3030
 
-[{% icon fa-envelope %} stefan@podcasterei.at](mailto://stefan@podcasterei.at)
+[{% icon fa-envelope %} stefan.haslinger@informatom.com](mailto://stefan.haslinger@informatom.com)
 
 <br/>
