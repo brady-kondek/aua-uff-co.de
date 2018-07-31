@@ -21,6 +21,9 @@ CHIP Computer {
 Die CPU mit ihren Hauptbestandteilen Controll Unit, A und D Register, Rechenwerk (ALU) und Program
 Counter (PC):
 
+![CPU Schemadiagramm](/img/cpu.png)
+
+
 ```vhdl
 CHIP CPU {
     IN  inM[16],         // M value input  (M = contents of RAM[A])
