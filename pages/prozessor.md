@@ -4,8 +4,6 @@ title: Computer aus Nand2Tetris in HDL
 permalink: prozessor/
 ---
 
-# Computer aus Nand2Tetris in HDL
-
 Der Computer bestehend aus CPU, RAM (Memory) und ROM (ROM32K):
 
 ```vhdl
