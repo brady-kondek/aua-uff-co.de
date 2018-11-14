@@ -2,6 +2,7 @@
 title: Datenschutzerklärung
 layout: page
 permalink: datenschutz/
+navigation: 2
 ---
 
 Der Schutz Ihrer persönlichen Daten ist uns wichtig. Wir verarbeiten Ihre Daten daher ausschließlich
