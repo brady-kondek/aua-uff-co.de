@@ -69,7 +69,8 @@ layout: null
             {% assign url = download_url | append: '/' | append: post.audio[page.format] %}
             <enclosure url="{{ url }}" length="{{ post.audio | audio:page.format | file_size }}" type="{{ page.format | mime_type }}" guid="{{ url | sha1:32}}" />
             <itunes:keywords>{{ post.tags }}</itunes:keywords>
-            <itunes:subtitle>{{ post.subtitle }}</itunes:subtitle>
+            <itunes:episode>{{ post.title | remove:"Episode "}}</itunes:episode>
+            <itunes:title>{{ post.subtitle }}</itunes:title>
             <itunes:summary>{{ post.summary }}</itunes:summary>
             <itunes:author>{{ post.author | otherwise:site.author }}</itunes:author>
             <itunes:explicit>{{ post.explicit | otherwise:site.explicit }}</itunes:explicit>
