@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/jekyll-octopod/jekyll-octopod
-  revision: 9625a211aed9cbc16bac921c28f7b6982b7322c5
+  revision: bc01a6b1d0b809dbd458bc7cec762c453a7a9be5
   specs:
-    jekyll-octopod (0.9.11)
+    jekyll-octopod (0.9.12)
       facets (~> 3.1)
       jekyll (~> 3.8)
       jekyll-admin (~> 0.4.0)
@@ -11,7 +11,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    addressable (2.5.2)
+    addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     backports (3.11.4)
     colorator (1.1.0)
