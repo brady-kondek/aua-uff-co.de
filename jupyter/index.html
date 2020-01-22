@@ -1,0 +1,133 @@
+<h2 id="setting-up-the-environment">Setting up the environment</h2>
+
+<p>IElixir uses the concept of virtual environments for managing packages. It uses <a href="https://github.com/pprzetacznik/IElixir#package-management-with-boyle"><code class="highlighter-rouge">Boyle</code></a> as its package manager.</p>
+
+<p>Let’s first create a <code class="highlighter-rouge">sparql_env</code> environment for our SPARQL dependencies using <code class="highlighter-rouge">Boyle.mk/1</code>. (Note also that there is a previously created an <code class="highlighter-rouge">rdf_env</code> environment set up for separately exploring <a href="https://hex.pm/packages/rdf">RDF.ex</a> which we can just ignore.)</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="no">Boyle</span><span class="o">.</span><span class="n">mk</span><span class="p">(</span><span class="s2">"sparql_env"</span><span class="p">)</span>
+
+<span class="no">All</span> <span class="n">dependencies</span> <span class="n">up</span> <span class="n">to</span> <span class="n">date</span>
+<span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="p">[</span><span class="s2">"sparql_env"</span><span class="p">,</span> <span class="s2">"wikidata"</span><span class="p">]}</span>
+</code></pre></div></div>
+
+<p>Next step is to activate the environment which will take care of compiling.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="no">Boyle</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s2">"sparql_env"</span><span class="p">)</span>
+
+<span class="no">All</span> <span class="n">dependencies</span> <span class="n">up</span> <span class="n">to</span> <span class="n">date</span>
+<span class="ss">:ok</span>
+</code></pre></div></div>
+
+<p>Next we install the dependencies:</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="no">Boyle</span><span class="o">.</span><span class="n">install</span><span class="p">({</span><span class="ss">:sparql_client</span><span class="p">,</span> <span class="s2">"~&gt; 0.2.1"</span><span class="p">})</span>
+
+<span class="ss">:ok</span>
+</code></pre></div></div>
+
+<h2 id="running-ae-example-sparqlclient-query">Running ae example SPARQL.Client query</h2>
+
+<p>Let’s choose a SPARQL endpoint, obviously, we take Wikidata:</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">service</span> <span class="o">=</span> <span class="s2">"https://query.wikidata.org/bigdata/namespace/wdq/sparql"</span>
+
+<span class="s2">"https://query.wikidata.org/bigdata/namespace/wdq/sparql"</span>
+</code></pre></div></div>
+
+<p>We take a query from the examples section of the query web service: The search for the biggest cities ruled by a female mayor:</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">query</span> <span class="o">=</span> <span class="sd">"""
+    SELECT DISTINCT ?city ?cityLabel ?mayor ?mayorLabel ?population WHERE
+    {
+        BIND(wd:Q6581072 AS ?sex)
+        BIND(wd:Q515 AS ?c)
+        ?city wdt:P31/wdt:P279* ?c .
+        ?city p:P6 ?statement .
+        ?statement ps:P6 ?mayor .
+        ?mayor wdt:P21 ?sex .
+        FILTER NOT EXISTS { ?statement pq:P582 ?x }
+        ?city wdt:P1082 ?population .
+        SERVICE wikibase:label {
+            bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" .
+        }
+    }
+    ORDER BY DESC(?population)
+    LIMIT 5
+  """</span>
+
+<span class="s2">"SELECT DISTINCT ?city ?cityLabel ?mayor ?mayorLabel ?population WHERE</span><span class="se">\n</span><span class="s2">{</span><span class="se">\n</span><span class="s2">    BIND(wd:Q6581072 AS ?sex)</span><span class="se">\n</span><span class="s2">    BIND(wd:Q515 AS ?c)</span><span class="se">\n</span><span class="s2">    ?city wdt:P31/wdt:P279* ?c .</span><span class="se">\n</span><span class="s2">    ?city p:P6 ?statement .</span><span class="se">\n</span><span class="s2">    ?statement ps:P6 ?mayor .</span><span class="se">\n</span><span class="s2">    ?mayor wdt:P21 ?sex .</span><span class="se">\n</span><span class="s2">    FILTER NOT EXISTS { ?statement pq:P582 ?x }</span><span class="se">\n</span><span class="s2">    ?city wdt:P1082 ?population .</span><span class="se">\n</span><span class="s2">    SERVICE wikibase:label {</span><span class="se">\n</span><span class="s2">        bd:serviceParam wikibase:language </span><span class="se">\"</span><span class="s2">[AUTO_LANGUAGE],en</span><span class="se">\"</span><span class="s2"> .</span><span class="se">\n</span><span class="s2">    }</span><span class="se">\n</span><span class="s2">}</span><span class="se">\n</span><span class="s2">ORDER BY DESC(?population)</span><span class="se">\n</span><span class="s2">LIMIT 5</span><span class="se">\n</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>Let’s run the query and capture the results:</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="p">%</span><span class="no">SPARQL</span><span class="o">.</span><span class="no">Query</span><span class="o">.</span><span class="no">Result</span><span class="p">{</span><span class="ss">results:</span> <span class="n">results</span><span class="p">}}</span> <span class="o">=</span> 
+    <span class="no">SPARQL</span><span class="o">.</span><span class="no">Client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">service</span><span class="p">,</span> <span class="ss">request_method:</span> <span class="ss">:get</span><span class="p">,</span> 
+                                        <span class="ss">protocol_version:</span> <span class="s2">"1.1"</span><span class="p">)</span>
+
+<span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="p">%</span><span class="no">SPARQL</span><span class="o">.</span><span class="no">Query</span><span class="o">.</span><span class="no">Result</span><span class="p">{</span><span class="ss">results:</span> <span class="p">[%{</span><span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q1490&gt;</span><span class="p">,</span> <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Tokyo"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q261703&gt;</span><span class="p">,</span> <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Yuriko Koike"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"13784212"</span><span class="p">},</span> <span class="p">%{</span><span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q8646&gt;</span><span class="p">,</span> <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Hong Kong"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q19217&gt;</span><span class="p">,</span> <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Carrie Lam"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"7336585"</span><span class="p">},</span> <span class="p">%{</span><span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q1530&gt;</span><span class="p">,</span> <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Baghdad"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q19367467&gt;</span><span class="p">,</span> <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Zekra Alwach"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"6960000"</span><span class="p">},</span> <span class="p">%{</span><span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q11462&gt;</span><span class="p">,</span> <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Surabaya"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q12522317&gt;</span><span class="p">,</span> <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Tri Rismaharini"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"4975000"</span><span class="p">},</span> <span class="p">%{</span><span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q38283&gt;</span><span class="p">,</span> <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Yokohama"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q529363&gt;</span><span class="p">,</span> <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Fumiko Hayashi"</span><span class="n">en</span><span class="p">,</span> <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"3731706"</span><span class="p">}],</span> <span class="ss">variables:</span> <span class="p">[</span><span class="s2">"city"</span><span class="p">,</span> <span class="s2">"cityLabel"</span><span class="p">,</span> <span class="s2">"mayor"</span><span class="p">,</span> <span class="s2">"mayorLabel"</span><span class="p">,</span> <span class="s2">"population"</span><span class="p">]}}</span>
+</code></pre></div></div>
+
+<p>Pretty printing that helps us humans capture the structure of the result more easily…</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="no">IO</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">results</span><span class="p">);</span> <span class="no">nil</span>
+
+<span class="p">[</span>
+  <span class="p">%{</span>
+  <span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q1490&gt;</span><span class="p">,</span>
+  <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Tokyo"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q261703&gt;</span><span class="p">,</span>
+  <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Yuriko Koike"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"13784212"</span>
+  <span class="p">},</span>
+  <span class="p">%{</span>
+  <span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q8646&gt;</span><span class="p">,</span>
+  <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Hong Kong"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q19217&gt;</span><span class="p">,</span>
+  <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Carrie Lam"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"7336585"</span>
+  <span class="p">},</span>
+  <span class="p">%{</span>
+  <span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q1530&gt;</span><span class="p">,</span>
+  <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Baghdad"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q19367467&gt;</span><span class="p">,</span>
+  <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Zekra Alwach"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"6960000"</span>
+  <span class="p">},</span>
+  <span class="p">%{</span>
+  <span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q11462&gt;</span><span class="p">,</span>
+  <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Surabaya"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q12522317&gt;</span><span class="p">,</span>
+  <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Tri Rismaharini"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"4975000"</span>
+  <span class="p">},</span>
+  <span class="p">%{</span>
+  <span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q38283&gt;</span><span class="p">,</span>
+  <span class="s2">"cityLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Yokohama"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"mayor"</span> <span class="o">=&gt;</span> <span class="sx">~I&lt;http://www.wikidata.org/entity/Q529363&gt;</span><span class="p">,</span>
+  <span class="s2">"mayorLabel"</span> <span class="o">=&gt;</span> <span class="sx">~L"Fumiko Hayashi"</span><span class="n">en</span><span class="p">,</span>
+  <span class="s2">"population"</span> <span class="o">=&gt;</span> <span class="sx">~L"3731706"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+<span class="no">nil</span>
+</code></pre></div></div>
+
+<p>Let’s dig deeper into the first label:</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">citylabel</span> <span class="o">=</span> <span class="no">List</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="n">results</span><span class="p">)[</span><span class="s2">"cityLabel"</span><span class="p">]</span>
+
+<span class="sx">~L"Tokyo"</span><span class="n">en</span>
+</code></pre></div></div>
+
+<p>That is an RDF literal, it has a language and a value attribute:</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">citylabel</span><span class="o">.</span><span class="n">language</span>
+
+<span class="s2">"en"</span>
+</code></pre></div></div>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">citylabel</span><span class="o">.</span><span class="n">value</span>
+
+<span class="s2">"Tokyo"</span>
+</code></pre></div></div>
+
+<p>And that’s all I’ve got for now!</p>
